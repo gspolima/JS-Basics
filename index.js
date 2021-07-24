@@ -1,30 +1,36 @@
-let greekThinkers = ['Socrates', 'Aristotle', 'Plato', 10];
-console.log(greekThinkers);
-
-// doesn't throw out of bounds exception,
-// returns undefined instead.
-console.log(greekThinkers[3]);
-console.log(greekThinkers.length);
-
-function greet(firstName, lastName) {
-    let timeOfDay;
-    let currentHour = new Date().getHours();
-    if (currentHour >= 0 && currentHour < 12 ) {
-        timeOfDay = 'morning';
+function power(base, exponent, usePowerOperator) {
+    if (usePowerOperator === true)
+    {
+        return `${base ** exponent} with power op`;
     }
-    else if (currentHour >= 12 && currentHour < 17) {
-        timeOfDay = 'afternoon';
+    else
+    {
+        let result = 1;
+        for(let index = 1; index <= exponent; index++)
+        {
+            result *= base;
+        }
+        return `${result} without power op`;
     }
-    else if (currentHour >= 17 && currentHour < 24) {
-        timeOfDay = 'evening';
-    }
-    console.log(`Good ${timeOfDay}, ${firstName} ${lastName}`);
 }
 
-greet('Gustavo', 'Sampaio');
+console.log(power(2, 9, true));
 
-function square(number) {
-    return number * number;
-}
+let customer = {
+    name: 'Jesse',
+    points: 107,
+    tier: ''
+};
 
-console.log(square(4));
+customer.points > 100 ? customer.tier = 'gold' : customer.tier = 'silver';
+
+console.log(customer.tier);
+
+// 01000110 = 70
+// 10100010 = 162
+
+// Bitwise OR = 11100110 = 230
+console.log(70 | 162);
+
+// Bitwise AND = 00000010 = 2
+console.log(70 & 162);
