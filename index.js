@@ -1,58 +1,63 @@
-// Factory functions
-function createMonitor(inches, resolution) {
-    return {
-        inches,
-        resolution,
-        turnOn() {
-            console.log('Monitor turned on');
-        }
-    }
+// [Value and Reference Types]
+let n = 10;
+
+function changeNumber(n) {
+    n = 20;
 }
 
-let monitor1 = createMonitor(24, { width: 1920, height: 1080 });
-console.log(monitor1.resolution);
-monitor1.turnOn();
+changeNumber(n);
+console.log(n);
 
-// Constructor functions
-function Monitor(inches, resolution) {
-    this.inches = inches,
-    this.resolution = resolution,
-    this.turnOn = function() {
-        console.log('Turning on...');
-    }
+
+let obj = {
+    name: 'Cake'
+};
+
+function changeObject(obj) {
+    obj.name = 'Pie';
+//  obj = {};   Won't change anything;
 }
 
-const monitor2 = new Monitor(19, { width: 3840, height: 2160 });
-console.log(monitor2);
-monitor2.turnOn();
+changeObject(obj);
+console.log(obj);
 
-// Dynamic objects
-const pen = {
-    color: 'Blue',
-    write() {
-        console.log('Writing...');
-    }
+// [Iterate through object properties]
+const book = {
+    title: 'An Honest Thief',
+    year: 1848
 }
 
-pen.manufacturer = 'BIC';
-delete pen.manufacturer;
+for (let key in book)
+    console.log(key, book[key]);
 
-console.log(pen);
+for (let key of Object.keys(book))
+    console.log(key);
 
-// Functions are objects!
-function Mug(capacity, origin) {
-    this.capacity = capacity,
-    this.origin = origin
+for (let entry of Object.entries(book))
+    console.log(entry);
+
+// [Cloning]
+// for (const key in book)
+//     anotherBook[key] = book[key];
+
+//const anotherBook = Object.assign(anotherBook, book);
+
+const anotherBook = {...book};
+console.log(anotherBook);
+
+// [Strings]
+const species = 'Homo Sapiens';
+const chars = species.split(' ');
+const result = '';
+for (const value of chars) {
+    console.log(result.concat(value));
 }
-console.log(Mug.constructor);
 
+// [Dates]
+const now = new Date();
+now.setMonth(7);
+now.setHours(8);
+now.setDate(23);
 
-const Mug1 = new Function('capacity', 'origin', `
-    this.capacity = capacity,
-    this.origin = origin`);
-
-const mug = new Mug1(0.4, 'USA');
-console.log(mug);
-
-Mug.call({}, 0.3);
-Mug.apply({}, /*[arg1, arg2, arg2]*/);
+console.log(now.getTimezoneOffset());
+console.log(now.toISOString());
