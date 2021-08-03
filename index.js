@@ -1,61 +1,87 @@
-// [Adding, Searching, Removing, Emptying, Combining and Slicing]
-const numbers = [1, 2, 4, 8, 16, 64];
+// [Joining, Sorting, Testing, Filtering, Mapping and Reducing]
+let numbers = [1, 16, 64, 8, 4, 2];
 
-numbers.push(128);
-numbers.unshift(0);
-numbers.splice(6, 0, 32);
+const games = [
+    { id: 1, name: 'Fortnite' },
+    { id: 2, name: 'GTA V' },
+    { id: 3, name: 'PUBG' },
+    { id: 4, name: 'Papers, Please' },
+    { id: 5, name: 'Shadow of the Colossus' }
+];
+
+numbers.forEach((number, index) => console.log(`${index}: ${number}`));
+
+const joined = numbers.join(', ');
+console.log(joined);
+
+const words = 'A picture is worth a THOUSAND words'.split(' ');
+console.log(words);
+
+const urlSlug = words.join('-').toLowerCase();
+console.log(urlSlug);
+
+
+numbers.sort();
+numbers.sort((x, y) => {
+    if (x > y) return 1;
+    if (x < y) return -1;
+    return 0;
+});
 
 console.log(numbers);
-console.log(numbers.indexOf(8));
-console.log(numbers.lastIndexOf(16));
-console.log(numbers.includes(128));
+
+games.sort((game1, game2) => {
+    const name1 = game1.name.toUpperCase();
+    const name2 = game2.name.toUpperCase();
+
+    if (name1 > name2) return 1;
+    if (name1 < name2) return -1;
+    return 0;
+});
+
+console.log(games);
 
 
-let freeGames = [
-    { id: 1, name: 'Rocket League' },
-    { id: 2, name: 'Fortnite' },
-    { id: 3, name: 'Team Fortress 2' },
-    { id: 4, name: 'Apex Legends' },
-    { id: 5, name: 'Destiny 2' }
-];
+const onlyPositive = numbers.every(n => n > 0);
+console.log(onlyPositive);
 
-const fortniteExists = freeGames.find(game => game.name === 'Fortnite');
-console.log(fortniteExists);
-
-const last = freeGames.pop();
-console.log(last);
-
-const first = freeGames.shift();
-console.log(first);
-
-const deleted = freeGames.splice(2, 1);
-console.log(deleted[0].name);
-console.log(freeGames);
-
-// const sameGames = freeGames;
-// freeGames.length = 0;
-// freeGames.splice(0, games.length);
-
-// console.log(sameGames);
-// console.log(freeGames);
+const atLeastOneStartsWithS = games.some((g) => {
+    return g.name.toUpperCase().startsWith('S')
+});
+console.log(atLeastOneStartsWithS);
 
 
-const paidGames = [
-    { id: 6, name: 'Grand Theft Auto V' },
-    { id: 7, name: 'PUBG' },
-    { id: 8, name: 'Papers, Please' },
-    { id: 9, name: 'Shadow of the Colossus' }
-];
+const greaterThanFive = numbers.filter(value => value > 5);
+console.log(greaterThanFive);
 
-// const combined = freeGames.concat(paidGames);
-const combined = [...freeGames, ...paidGames];
-console.log(combined);
+const startingWithP = games.filter(g => {
+    return g.name.toUpperCase().startsWith('P')
+});
+console.log(startingWithP);
 
-const copy = [...combined];
-console.log(copy);
 
-const singlePlayerGames = paidGames.slice(2);
-console.log(singlePlayerGames);
+const items = numbers
+    .filter(number => number < 10)
+    .sort((x, y) => {
+        if (x > y) return 1;
+        if (x < y) return -1;
+        return 0;
+    })
+    .map(number => ({ value: number }))
+    .filter(obj => obj.value % 2 === 0);
 
-combined[3].name = 'PUBG: Battlegrounds';
-console.log(paidGames[1]);
+console.log(items);
+
+
+const sum = numbers.reduce(
+    (accumulator, currentValue) => accumulator + currentValue);
+console.log(sum);
+
+// const uniqueGameName = games.reduce((accumulator, currentGame) => {
+//     for (let char of currentGame.name)
+//         if (!accumulator.name.includes(char))
+//             accumulator.name += char;
+//     return accumulator;
+// });
+
+// console.log(uniqueGameName.name);
